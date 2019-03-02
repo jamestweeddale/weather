@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+}
+
+group 'jt'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+ext{
+    springbootVersion = '2.1.3.RELEASE'
+    mockitoVersion = '2.24.5'
+    junitVersion = '4.12'
+    slf4jVersion = '1.7.26'
+    logbackVersion = '1.2.3'
+    pi4jVersion = '1.3-SNAPSHOT'
+
+}
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter:$springbootVersion"
+
+    testCompile "org.mockito:mockito-core:$mockitoVersion"
+    testCompile "junit:junit:$junitVersion"
+}
+

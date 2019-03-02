@@ -1,0 +1,5 @@
+rootProject.name = 'weather'
+include 'station'
+include 'server'
+include 'shared'
+

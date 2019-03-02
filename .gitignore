@@ -1,0 +1,15 @@
+##IntelliJ##
+.idea
+weather.iml
+
+##Java##
+*.jar
+*.war
+*.ear
+*.class
+
+##gradle##
+**/build
+gradle-app.setting
+.gradle
+!gradle-wrapper.jar
