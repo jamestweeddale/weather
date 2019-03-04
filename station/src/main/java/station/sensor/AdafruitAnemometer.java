@@ -12,7 +12,7 @@ import reading.WindSpeed;
 import reading.units.SpeedUnits;
 import station.convert.AnalogToDigitalValueConverter;
 import station.convert.MCP3008OutputConverter;
-import station.sensor.io.GpioService;
+import station.io.GpioService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +27,9 @@ public class AdafruitAnemometer implements Sensor {
 
     private AnalogToDigitalValueConverter analogToDigitalValueConverter;
 
-    public final static double sensorVoltageMin = 0.40; //min output voltage from anemometer spec
-    public final static double sensorVoltageMax = 2.0; //max output voltage from anemometer spec
+    //spec values from Adafruit anemometer documentation
+    public final static double sensorVoltageMin = 0.40; //min sensor output voltage from anemometer spec
+    public final static double sensorVoltageMax = 2.0; //max sensor output voltage from anemometer spec
     public final static double maxWindSpeedMps = 32.4; //wind speed in meters/sec corresponding to maximum voltage
 
     @Autowired
@@ -44,10 +45,11 @@ public class AdafruitAnemometer implements Sensor {
         List<Reading> readings = new ArrayList();
 
         double val = gpioService.readAnalogValue(analogPin);
-        double mph = analogToDigitalValueConverter.convert(val);
-        readings.add(new WindSpeed(mph, SpeedUnits.MPS));
+        double mps = analogToDigitalValueConverter.convert(val);
+        readings.add(new WindSpeed(mps, SpeedUnits.MPS));
 
         return readings;
     }
 
 }
+

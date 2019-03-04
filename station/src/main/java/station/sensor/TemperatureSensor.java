@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reading.Reading;
-import station.sensor.io.GpioService;
+import station.io.GpioService;
 
 import java.util.ArrayList;
 import java.util.List;

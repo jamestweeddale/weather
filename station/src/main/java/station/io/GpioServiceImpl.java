@@ -1,4 +1,4 @@
-package station.sensor.io;
+package station.io;
 
 import com.pi4j.gpio.extension.base.AdcGpioProvider;
 import com.pi4j.gpio.extension.mcp.MCP3008GpioProvider;

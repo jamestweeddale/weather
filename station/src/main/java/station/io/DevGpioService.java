@@ -1,4 +1,4 @@
-package station.sensor.io;
+package station.io;
 
 import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.PinState;

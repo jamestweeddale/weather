@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import reading.Reading;
 import station.sensor.Sensor;
@@ -22,6 +21,7 @@ public class StationImpl implements Station {
 
     private List<Sensor> sensors;
 
+
     @Autowired
     public StationImpl(@Value("${station.uuid:}") UUID uuid,
                        List<Sensor> sensors) {
@@ -30,8 +30,8 @@ public class StationImpl implements Station {
         logger.info("Started station: " + uuid);
     }
 
+
     @Override
-    @Scheduled(fixedRateString ="${station.reading-interval-secs:60000}", initialDelay = 0)
     public List<Reading> readAllSensors() {
         List<Reading> allReadings = new ArrayList<>();
 
