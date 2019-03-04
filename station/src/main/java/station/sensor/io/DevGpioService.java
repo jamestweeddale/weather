@@ -24,8 +24,8 @@ public class DevGpioService implements GpioService {
     }
 
     @Override
-    public Double readAnalogValue(Pin pin) {
+    public double readAnalogValue(Pin pin) {
         logger.debug("called readAnalogValue pin={}", pin);
-        return null;
+        return 0.0;
     }
 }

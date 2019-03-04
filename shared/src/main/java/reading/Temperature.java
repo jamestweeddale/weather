@@ -7,6 +7,11 @@ public class Temperature implements Reading {
     private Double value = null;
     private TemperatureUnits units = TemperatureUnits.FARENHEIT;
 
+    public Temperature(Double value, TemperatureUnits units) {
+        this.value = value;
+        this.units = units;
+    }
+
     public void setValue(Double value) {
         this.value = value;
     }

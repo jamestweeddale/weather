@@ -1,5 +1,5 @@
 package reading.units;
 
 public enum SpeedUnits {
-    MPH, KPH;
+    MPH, KPH, MPS;
 }

@@ -7,6 +7,6 @@ public interface GpioService {
 
     void writePinState(Pin pin, PinState pinState);
     PinState readPinState(Pin pin);
-    Double readAnalogValue(Pin pin);
+    double readAnalogValue(Pin pin);
 
 }

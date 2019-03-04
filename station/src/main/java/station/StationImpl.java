@@ -30,6 +30,10 @@ public class StationImpl implements Station {
 
         sensors.forEach(sensor -> allReadings.addAll(sensor.read()));
 
+        for(Reading reading : allReadings){
+            logger.debug(reading.getValue() + " " + reading.getUnits());
+        }
+
         return allReadings;
     }
 
