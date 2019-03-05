@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
+@SuppressWarnings({"squid:S1948"})
 public class StationReadings implements Serializable {
     private UUID stationUUID;
     private List<Reading> readings;

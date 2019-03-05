@@ -27,7 +27,7 @@ public class StationImpl implements Station {
                        List<Sensor> sensors) {
         this.uuid = uuid;
         this.sensors = sensors;
-        logger.info("Started station: " + uuid);
+        logger.info("Started station: {}", uuid);
     }
 
 
@@ -38,7 +38,7 @@ public class StationImpl implements Station {
         sensors.forEach(sensor -> allReadings.addAll(sensor.read()));
 
         for(Reading reading : allReadings){
-            logger.debug(reading.getValue() + " " + reading.getUnits());
+            logger.debug("{} {}", reading.getValue(), reading.getUnits());
         }
 
         return allReadings;

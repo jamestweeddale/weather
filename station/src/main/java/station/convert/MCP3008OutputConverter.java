@@ -2,7 +2,7 @@ package station.convert;
 
 public class MCP3008OutputConverter implements AnalogToDigitalValueConverter {
 
-    public final static double voltageConversionConstant = (5.0 / 1024.0); //maps the value provided from the analog read function, which ranges from 0 to 1023, to actual voltage, which ranges from 0V to 5V
+    public static final double VOLTAGE_CONVERSION_CONSTANT = (5.0 / 1024.0); //maps the value provided from the analog read function, which ranges from 0 to 1023, to actual voltage, which ranges from 0V to 5V
 
     private double sensorVoltageMin;   //min output voltage from sensor spec
     private double sensorVoltageMax;   //max output voltage from sensor spec
@@ -17,9 +17,9 @@ public class MCP3008OutputConverter implements AnalogToDigitalValueConverter {
     @Override
     public double convert(double mcpOutputValue) {
 
-        double sensorVoltage = mcpOutputValue * voltageConversionConstant; //Convert sensor value to actual voltage
+        double sensorVoltage = mcpOutputValue * VOLTAGE_CONVERSION_CONSTANT; //Convert sensor value to actual voltage
 
-        double windSpeed = 0.0;
+        double windSpeed;
         if (sensorVoltage <= sensorVoltageMin) {
             windSpeed = 0.0; //Check if voltage is below minimum value. If so, set to zero.
         } else {
