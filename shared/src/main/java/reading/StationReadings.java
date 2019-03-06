@@ -1,6 +1,4 @@
-package station.sendservice;
-
-import reading.Reading;
+package reading;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,6 +8,9 @@ import java.util.UUID;
 public class StationReadings implements Serializable {
     private UUID stationUUID;
     private List<Reading> readings;
+
+    public StationReadings() {
+    }
 
     public StationReadings(UUID stationUUID, List<Reading> readings) {
         this.stationUUID = stationUUID;

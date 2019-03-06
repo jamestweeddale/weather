@@ -10,9 +10,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import reading.Reading;
 import station.sendservice.SendService;
-import station.sendservice.StationReadings;
+import reading.StationReadings;
 
-import java.io.IOException;
 import java.util.List;
 
 
@@ -33,15 +32,15 @@ public class StationApplication {
                 .run(args);
     }
 
-    @Scheduled(fixedRateString ="${station.reading-interval-secs:60000}", initialDelay = 0)
-    public void collectAndReport(){
+    @Scheduled(fixedRateString = "${station.reading-interval-secs:60000}", initialDelay = 0)
+    public void collectAndReport() {
 
         List<Reading> readings = station.readAllSensors();
 
         try {
             sendService.send(new StationReadings(station.getUUID(), readings));
-        }catch (IOException ioe){
-            logger.error("Exception occurred sending readings", ioe);
+        } catch (Exception e) {
+            logger.error("Exception occurred sending readings", e);
         }
     }
 }

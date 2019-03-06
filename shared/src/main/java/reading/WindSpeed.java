@@ -7,13 +7,12 @@ public class WindSpeed implements Reading {
     private Double value = null;
     private SpeedUnits units = SpeedUnits.MPH;
 
+    public WindSpeed() {
+    }
+
     public WindSpeed(Double value, SpeedUnits units) {
         this.value = value;
         this.units = units;
-    }
-
-    public void setValue(Double value) {
-        this.value = value;
     }
 
     @Override
@@ -24,10 +23,6 @@ public class WindSpeed implements Reading {
     @Override
     public SpeedUnits getUnits() {
         return units;
-    }
-
-    public void setUnits(SpeedUnits units) {
-        this.units = units;
     }
 
 }

@@ -1,7 +1,7 @@
 package station.sendservice;
 
-import java.io.IOException;
+import reading.StationReadings;
 
 public interface SendService {
-    void send(StationReadings stationReadings) throws IOException;
+    void send(StationReadings stationReadings) throws Exception;
 }

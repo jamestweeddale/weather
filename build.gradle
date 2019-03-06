@@ -13,12 +13,13 @@ repositories {
 
 ext{
     springbootVersion = '2.1.3.RELEASE'
+    springVersion = '5.1.5.RELEASE'
     mockitoVersion = '2.24.5'
     junitVersion = '4.12'
     slf4jVersion = '1.7.26'
     logbackVersion = '1.2.3'
     pi4jVersion = '1.3-SNAPSHOT'
-
+    jacksonVersion = '2.9.8'
 }
 
 dependencies {
