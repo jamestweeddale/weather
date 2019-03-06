@@ -1,4 +1,4 @@
-package station.convert;
+package station.io.convert;
 
 import org.junit.Test;
 import station.sensor.AdafruitAnemometer;

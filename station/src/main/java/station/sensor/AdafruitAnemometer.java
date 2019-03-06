@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import reading.Reading;
 import reading.WindSpeed;
 import reading.units.SpeedUnits;
-import station.convert.AnalogToDigitalValueConverter;
-import station.convert.MCP3008OutputConverter;
+import station.io.convert.AnalogToDigitalValueConverter;
+import station.io.convert.MCP3008OutputConverter;
 import station.io.GpioService;
 
 import java.util.ArrayList;

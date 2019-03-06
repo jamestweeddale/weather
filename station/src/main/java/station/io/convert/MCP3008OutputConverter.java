@@ -1,4 +1,4 @@
-package station.convert;
+package station.io.convert;
 
 public class MCP3008OutputConverter implements AnalogToDigitalValueConverter {
 
