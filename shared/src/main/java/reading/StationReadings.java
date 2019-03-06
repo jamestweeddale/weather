@@ -1,11 +1,9 @@
 package reading;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
-@SuppressWarnings({"squid:S1948"})
-public class StationReadings implements Serializable {
+public class StationReadings {
     private UUID stationUUID;
     private List<Reading> readings;
 
