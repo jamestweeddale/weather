@@ -5,14 +5,12 @@ import com.pi4j.io.i2c.I2CDevice;
 import com.pi4j.io.i2c.I2CFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reading.Humidity;
 import reading.Reading;
 import reading.Temperature;
 import reading.units.HumidityUnits;
 import reading.units.TemperatureUnits;
-import station.io.GpioService;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,14 +19,6 @@ import java.util.List;
 @Service
 public class TemperatureHumiditySensor implements Sensor {
     private static final Logger logger = LoggerFactory.getLogger(TemperatureHumiditySensor.class);
-
-    private GpioService gpioService;
-
-    @Autowired
-    public TemperatureHumiditySensor(GpioService gpioService) {
-        this.gpioService = gpioService;
-    }
-
 
     @Override
     public List<Reading> read() {
