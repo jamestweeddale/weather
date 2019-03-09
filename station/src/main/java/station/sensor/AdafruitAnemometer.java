@@ -10,10 +10,11 @@ import org.springframework.stereotype.Service;
 import reading.Reading;
 import reading.WindSpeed;
 import reading.units.SpeedUnits;
+import station.io.GpioService;
 import station.io.convert.AnalogToDigitalValueConverter;
 import station.io.convert.MCP3008OutputConverter;
-import station.io.GpioService;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class AdafruitAnemometer implements Sensor {
 
         double val = gpioService.readAnalogValue(analogPin);
         double mps = analogToDigitalValueConverter.convert(val);
-        readings.add(new WindSpeed(mps, SpeedUnits.MPS));
+        readings.add(new WindSpeed(mps, SpeedUnits.MPS, ZonedDateTime.now()));
 
         return readings;
     }

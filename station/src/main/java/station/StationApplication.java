@@ -9,9 +9,12 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import reading.Reading;
-import station.sendservice.SendService;
 import reading.StationReadings;
+import station.sendservice.SendService;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 
@@ -43,4 +46,20 @@ public class StationApplication {
             logger.error("Exception occurred sending readings", e);
         }
     }
+
+
+    @Scheduled(fixedRateString = "${station.picture-interval-secs:60000}", initialDelay = 0)
+    public void collectAndReportPicture() {
+        logger.info("snapping a pic...");
+        try {
+            File picture = station.takePicture();
+
+            sendService.send(station.getUUID(), ZonedDateTime.now(), picture);
+
+            Files.delete(picture.toPath());
+        } catch (Exception e) {
+            logger.error("Exception occurred sending readings", e);
+        }
+    }
+
 }

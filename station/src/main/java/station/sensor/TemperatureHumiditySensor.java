@@ -13,6 +13,7 @@ import reading.units.HumidityUnits;
 import reading.units.TemperatureUnits;
 
 import java.io.IOException;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +26,9 @@ public class TemperatureHumiditySensor implements Sensor {
         List<Reading> readings = new ArrayList();
 
         try {
-            I2CBus Bus = I2CFactory.getInstance(I2CBus.BUS_1);
+            I2CBus bus = I2CFactory.getInstance(I2CBus.BUS_1);
             //SHT020 I2C address is 0x40
-            I2CDevice device = Bus.getDevice(0x40);
+            I2CDevice device = bus.getDevice(0x40);
 
             // Send humidity measurement command, NO HOLD MASTER
             device.write((byte) 0xF5);
@@ -53,14 +54,15 @@ public class TemperatureHumiditySensor implements Sensor {
             double cTemp = (((((data[0] & 0xFF) * 256) + (data[1] & 0xFF)) * 175.72) / 65536.0) - 46.85;
             double fTemp = cTemp * 1.8 + 32;
 
-            readings.add(new Temperature(fTemp, TemperatureUnits.FARENHEIT));
-            readings.add(new Humidity(humidity, HumidityUnits.RH));
+            ZonedDateTime readingTime = ZonedDateTime.now();
+            readings.add(new Temperature(fTemp, TemperatureUnits.FARENHEIT, readingTime));
+            readings.add(new Humidity(humidity, HumidityUnits.RH, readingTime));
 
-            logger.debug("SHT20 Relative Humidity : %.2f %%RH %n   Temperature {}F", humidity, fTemp);
         } catch (IOException | I2CFactory.UnsupportedBusNumberException | InterruptedException e) {
-            e.printStackTrace();
+           logger.error("Exception occurred reading temperature/humidity",e);
         }
 
         return readings;
     }
+
 }

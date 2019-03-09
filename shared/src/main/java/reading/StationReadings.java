@@ -5,6 +5,7 @@ import java.util.UUID;
 
 public class StationReadings {
     private UUID stationUUID;
+
     private List<Reading> readings;
 
     public StationReadings() {
@@ -23,4 +24,12 @@ public class StationReadings {
         return readings;
     }
 
+
+    @Override
+    public String toString() {
+        return "StationReadings{" +
+                "stationUUID=" + stationUUID +
+                ", readings=" + readings +
+                '}';
+    }
 }
