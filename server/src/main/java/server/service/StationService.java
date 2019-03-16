@@ -1,15 +1,15 @@
 package server.service;
 
-import server.entity.Station;
+import server.entity.StationEntity;
 
 import java.util.Optional;
 
 
 public interface StationService {
 
-    Station save(Station station);
+    StationEntity save(StationEntity station);
 
-    Iterable<Station> getAll();
+    Iterable<StationEntity> getAll();
 
-    Optional<Station> getById(Long id);
+    Optional<StationEntity> getById(Long id);
 }

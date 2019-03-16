@@ -1,21 +1,25 @@
 package server.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.UUID;
 
-@Entity
-public class Station {
+@Entity(name="station")
+public class StationEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private UUID uuid;
 
+    @Column(nullable = false)
     private String name;
 
+    public StationEntity() {
+    }
 
-    public Station(Long id, UUID uuid, String name) {
+    public StationEntity(Long id, UUID uuid, String name) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;

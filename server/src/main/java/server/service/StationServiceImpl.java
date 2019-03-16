@@ -2,7 +2,7 @@ package server.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import server.entity.Station;
+import server.entity.StationEntity;
 import server.repository.StationRepository;
 
 import java.util.Optional;
@@ -18,17 +18,17 @@ public class StationServiceImpl implements StationService{
     }
 
     @Override
-    public Station save(Station station) {
+    public StationEntity save(StationEntity station) {
         return stationRepository.save(station);
     }
 
     @Override
-    public Iterable<Station> getAll() {
+    public Iterable<StationEntity> getAll() {
         return stationRepository.findAll();
     }
 
     @Override
-    public Optional<Station> getById(Long id) {
+    public Optional<StationEntity> getById(Long id) {
         return stationRepository.findById(id);
     }
 }
