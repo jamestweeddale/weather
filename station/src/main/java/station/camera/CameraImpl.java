@@ -28,20 +28,12 @@ public class CameraImpl implements Camera{
 
     //todo: run on separate thread
     @Override
-    public File takePicture(){
-        File f = null;
-        try {
-            String fullFilePath = fileDir + File.separator + FILE_NAME;
+    public File takePicture() throws IOException{
+        String fullFilePath = fileDir + File.separator + FILE_NAME;
 
-            Runtime.getRuntime().exec(COMMAND + fullFilePath);
+        Runtime.getRuntime().exec(COMMAND + fullFilePath);
 
-            f = new File(fullFilePath);
-
-        } catch (IOException e) {
-            logger.error("Failed reading image content", e);
-        }
-
-        return f;
+        return new File(fullFilePath);
     }
 
     private void createDirIfDNE(){

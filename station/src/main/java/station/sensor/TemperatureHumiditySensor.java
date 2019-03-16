@@ -21,48 +21,73 @@ import java.util.List;
 public class TemperatureHumiditySensor implements Sensor {
     private static final Logger logger = LoggerFactory.getLogger(TemperatureHumiditySensor.class);
 
+    private I2CDevice i2CDevice;
+
+    private static final byte DEVICE_I2C_ADDR = 0x40;  //SHT020 I2C address is 0x40
+
+    public TemperatureHumiditySensor() throws IOException, I2CFactory.UnsupportedBusNumberException {
+        I2CBus bus = I2CFactory.getInstance(I2CBus.BUS_1);
+        i2CDevice = bus.getDevice(DEVICE_I2C_ADDR);
+    }
+
     @Override
     public List<Reading> read() {
         List<Reading> readings = new ArrayList();
 
-        try {
-            I2CBus bus = I2CFactory.getInstance(I2CBus.BUS_1);
-            //SHT020 I2C address is 0x40
-            I2CDevice device = bus.getDevice(0x40);
+        ZonedDateTime readingTime = ZonedDateTime.now();
 
-            // Send humidity measurement command, NO HOLD MASTER
-            device.write((byte) 0xF5);
-            Thread.sleep(500);
-
-            // Read 2 bytes of humidity data
-            // humidity msb, humidity lsb
-            byte[] data = new byte[2];
-            device.read(data, 0, 2);
-
-            // Convert the data
-            double humidity = (((((data[0] & 0xFF) * 256.0) + (data[1] & 0xFF)) * 125.0) / 65536.0) - 6;
-
-            // Send temperature measurement command, NO HOLD MASTER
-            device.write((byte) 0xF3);
-            Thread.sleep(500);
-
-            // Read 2 bytes of temperature data
-            // temp msb, temp lsb
-            device.read(data, 0, 2);
-
-            // Convert the data
-            double cTemp = (((((data[0] & 0xFF) * 256) + (data[1] & 0xFF)) * 175.72) / 65536.0) - 46.85;
-            double fTemp = cTemp * 1.8 + 32;
-
-            ZonedDateTime readingTime = ZonedDateTime.now();
-            readings.add(new Temperature(fTemp, TemperatureUnits.FARENHEIT, readingTime));
+        try{
+            double humidity = readHumidity();
             readings.add(new Humidity(humidity, HumidityUnits.RH, readingTime));
+        }catch (IOException e){
+            logger.error("Problem reading humidity", e);
+        }
 
-        } catch (IOException | I2CFactory.UnsupportedBusNumberException | InterruptedException e) {
-           logger.error("Exception occurred reading temperature/humidity",e);
+        try{
+            double temperature = readTemperatureF();
+            readings.add(new Temperature(temperature, TemperatureUnits.FARENHEIT, readingTime));
+        }catch (IOException e){
+            logger.error("Problem reading temperature", e);
         }
 
         return readings;
     }
 
+
+    private double readTemperatureF() throws IOException{
+        byte[] data = new byte[2];
+
+        // Send temperature measurement command, NO HOLD MASTER
+        i2CDevice.write((byte) 0xF3);
+        sleep();
+
+        // Read 2 bytes of temperature data
+        // temp msb, temp lsb
+        i2CDevice.read(data, 0, 2);
+
+        // Convert the data
+        double cTemp = (((((data[0] & 0xFF) * 256) + (data[1] & 0xFF)) * 175.72) / 65536.0) - 46.85;
+        return cTemp * 1.8 + 32;  //convert to F
+    }
+
+    private double readHumidity() throws IOException{
+        // Send humidity measurement command, NO HOLD MASTER
+        i2CDevice.write((byte) 0xF5);
+        sleep();
+        // Read 2 bytes of humidity data
+        // humidity msb, humidity lsb
+        byte[] data = new byte[2];
+        i2CDevice.read(data, 0, 2);
+
+        // Convert the data
+        return (((((data[0] & 0xFF) * 256.0) + (data[1] & 0xFF)) * 125.0) / 65536.0) - 6;
+    }
+
+    private void sleep(){
+        try {
+            Thread.sleep(500);
+        }catch (InterruptedException e){
+            logger.error("Exception while sleeping", e);
+        }
+    }
 }

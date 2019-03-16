@@ -8,12 +8,10 @@ import com.pi4j.io.spi.SpiDevice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
-@Profile("pi")
 @Service
 public class GpioServiceImpl implements GpioService {
     private static final Logger logger = LoggerFactory.getLogger(GpioServiceImpl.class);

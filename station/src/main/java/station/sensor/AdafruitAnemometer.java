@@ -14,6 +14,7 @@ import station.io.GpioService;
 import station.io.convert.AnalogToDigitalValueConverter;
 import station.io.convert.MCP3008OutputConverter;
 
+import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,9 +46,13 @@ public class AdafruitAnemometer implements Sensor {
     public List<Reading> read() {
         List<Reading> readings = new ArrayList<>();
 
-        double val = gpioService.readAnalogValue(analogPin);
-        double mps = analogToDigitalValueConverter.convert(val);
-        readings.add(new WindSpeed(mps, SpeedUnits.MPS, ZonedDateTime.now()));
+        try {
+            double val = gpioService.readAnalogValue(analogPin);
+            double mps = analogToDigitalValueConverter.convert(val);
+            readings.add(new WindSpeed(mps, SpeedUnits.MPS, ZonedDateTime.now()));
+        }catch (Exception e){
+            logger.error("Problem reading anemometer", e);
+        }
 
         return readings;
     }
