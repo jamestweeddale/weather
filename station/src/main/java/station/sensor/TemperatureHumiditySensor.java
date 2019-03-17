@@ -6,11 +6,8 @@ import com.pi4j.io.i2c.I2CFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import reading.Humidity;
 import reading.Reading;
-import reading.Temperature;
-import reading.units.HumidityUnits;
-import reading.units.TemperatureUnits;
+import reading.ReadingUnits;
 
 import java.io.IOException;
 import java.time.ZonedDateTime;
@@ -23,6 +20,10 @@ public class TemperatureHumiditySensor implements Sensor {
 
     private I2CDevice i2CDevice;
 
+    private static final String HUMIDITY_READING_NAME = "Humidity";
+    private static final String TEMPERATURE_READING_NAME = "Temperature";
+
+
     private static final byte DEVICE_I2C_ADDR = 0x40;  //SHT020 I2C address is 0x40
 
     public TemperatureHumiditySensor() throws IOException, I2CFactory.UnsupportedBusNumberException {
@@ -32,20 +33,20 @@ public class TemperatureHumiditySensor implements Sensor {
 
     @Override
     public List<Reading> read() {
-        List<Reading> readings = new ArrayList();
+        List<Reading> readings = new ArrayList<>();
 
         ZonedDateTime readingTime = ZonedDateTime.now();
 
         try{
             double humidity = readHumidity();
-            readings.add(new Humidity(humidity, HumidityUnits.RH, readingTime));
+            readings.add(new Reading(HUMIDITY_READING_NAME, humidity, ReadingUnits.RELATIVE_HUMIDITY, readingTime));
         }catch (IOException e){
             logger.error("Problem reading humidity", e);
         }
 
         try{
             double temperature = readTemperatureF();
-            readings.add(new Temperature(temperature, TemperatureUnits.FARENHEIT, readingTime));
+            readings.add(new Reading(TEMPERATURE_READING_NAME, temperature, ReadingUnits.FARENHEIT, readingTime));
         }catch (IOException e){
             logger.error("Problem reading temperature", e);
         }

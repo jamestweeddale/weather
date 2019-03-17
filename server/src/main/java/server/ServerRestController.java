@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import reading.StationReadings;
+import server.service.ReadingStorageService;
 
 import java.time.ZonedDateTime;
 import java.util.UUID;
@@ -22,13 +23,15 @@ import java.util.UUID;
 public class ServerRestController {
     private static final Logger logger = LoggerFactory.getLogger(ServerRestController.class);
 
-    FileStorageService fileStorageService;
+    private FileStorageService fileStorageService;
+
+    private ReadingStorageService readingStorageService;
 
     @Autowired
-    public ServerRestController(FileStorageService fileStorageService) {
+    public ServerRestController(FileStorageService fileStorageService, ReadingStorageService readingStorageService) {
         this.fileStorageService = fileStorageService;
+        this.readingStorageService = readingStorageService;
     }
-
 
     @PostMapping(value = "/post/station-readings", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity postStationReadings(@RequestBody @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) StationReadings stationReadings) {
@@ -36,6 +39,9 @@ public class ServerRestController {
         HttpStatus httpStatus = HttpStatus.OK;
         try {
             logger.debug("Received data: {}", objectMapper.writeValueAsString(stationReadings));
+
+            readingStorageService.store(stationReadings);
+
         } catch (Exception e) {
             logger.error("Error occurred in /post/station-readings", e);
             httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;

@@ -11,6 +11,7 @@ public class StationEntity {
     private Long id;
 
     @Column(nullable = false)
+    @org.hibernate.annotations.Type(type="uuid-char")
     private UUID uuid;
 
     @Column(nullable = false)
