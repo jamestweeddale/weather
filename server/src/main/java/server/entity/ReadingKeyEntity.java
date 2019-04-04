@@ -3,7 +3,8 @@ package server.entity;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity(name="reading_key")
+@Entity
+@Table(name="reading_key")
 public class ReadingKeyEntity {
 
     @Id

@@ -3,7 +3,8 @@ package server.entity;
 import javax.persistence.*;
 import java.util.UUID;
 
-@Entity(name="station")
+@Entity
+@Table(name="station")
 public class StationEntity {
 
     @Id

@@ -19,6 +19,7 @@ dependencies {
     compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion";
     compile project (':shared')
+    implementation(project(':ui'))
 
     testCompile("org.springframework.boot:spring-boot-starter-test:$springbootVersion")
     testCompile "org.mockito:mockito-core:$mockitoVersion"

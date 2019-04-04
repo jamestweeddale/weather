@@ -1,0 +1,20 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ReadingService {
+
+  constructor(private http: HttpClient) {
+  }
+
+  getReadingKeysForStation(stationId:number): Observable<any> {
+    return this.http.get('//localhost:8080/station/' + stationId + '/reading-keys');
+  }
+
+  getLatestValueFor(stationId:number, readingKeyId:number): Observable<Reading> {
+      return this.http.get<Reading>('//localhost:8080/station/'+stationId+'/latest-reading/'+readingKeyId);
+    }
+}

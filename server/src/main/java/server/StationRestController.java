@@ -20,15 +20,15 @@ import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @RestController
-public class ServerRestController {
-    private static final Logger logger = LoggerFactory.getLogger(ServerRestController.class);
+public class StationRestController {
+    private static final Logger logger = LoggerFactory.getLogger(StationRestController.class);
 
     private FileStorageService fileStorageService;
 
     private ReadingStorageService readingStorageService;
 
     @Autowired
-    public ServerRestController(FileStorageService fileStorageService, ReadingStorageService readingStorageService) {
+    public StationRestController(FileStorageService fileStorageService, ReadingStorageService readingStorageService) {
         this.fileStorageService = fileStorageService;
         this.readingStorageService = readingStorageService;
     }
