@@ -8,8 +8,7 @@ export class StationService {
   constructor(private http: HttpClient) {
   }
 
-  getAll(): Observable<any> {
-    console.log('getting data');
+  getAll(): Observable<any> { //todo type to station
     return this.http.get('//localhost:8080/station-list');
   }
 }

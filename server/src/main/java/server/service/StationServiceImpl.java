@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import server.entity.StationEntity;
 import server.repository.StationRepository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -24,7 +25,7 @@ public class StationServiceImpl implements StationService{
     }
 
     @Override
-    public Iterable<StationEntity> getAll() {
+    public List<StationEntity> getAll() {
         return stationRepository.findAll();
     }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StationService } from '../weather/station.service';
+import { StationService } from '../station-service/station.service';
 
 @Component({
   selector: 'station-list',
@@ -8,14 +8,13 @@ import { StationService } from '../weather/station.service';
 })
 export class StationListComponent implements OnInit {
 
-  stations: Array<any>;
+  stations: Array<Station>;
 
   constructor(private stationService: StationService) { }
 
  ngOnInit() {
-    this.stationService.getAll().subscribe(data => {
-        console.log("test");
-      this.stations = data;
+    this.stationService.getAll().subscribe(stations => {
+      this.stations = stations;
     });
   }
 

@@ -1,5 +1,5 @@
-<h2>Stations</h2>
-
-<div *ngFor="let station of stations">
-  {{station.name}}
+<div class="d-flex justify-content-center">
+  <div class="card-deck">
+    <station-card *ngFor="let station of stations" [station]="station"></station-card>
+  </div>
 </div>

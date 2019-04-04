@@ -1,9 +1,15 @@
 package server.service;
 
+import server.entity.ReadingKeyEntity;
 import server.entity.ReadingValueEntity;
+
+import java.util.List;
 
 public interface ReadingValueService {
 
-    Iterable<ReadingValueEntity> saveAll(Iterable<ReadingValueEntity> readingEntities);
+    List<ReadingValueEntity> saveAll(Iterable<ReadingValueEntity> readingEntities);
 
+    ReadingValueEntity getLatestFor(Long stationId, Long readingKeyId);
+
+    List<ReadingKeyEntity> getDistinctReadingKeysForStation(Long stationId);
 }

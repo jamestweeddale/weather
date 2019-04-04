@@ -33,7 +33,7 @@ public class ReadingStorageService {
         List<ReadingValueEntity> readingValueEntityList = new ArrayList<>();
         for(Reading reading : stationReadings.getReadings()) {
             ReadingKeyEntity readingKeyEntity = readingKeyService.getForReading(reading);
-            readingValueEntityList.add(new ReadingValueEntity(readingKeyEntity, stationEntity, reading.getValue(), reading.getTime()));
+            readingValueEntityList.add(new ReadingValueEntity(readingKeyEntity, stationEntity, reading.getValue(), reading.getUnits(), reading.getTime()));
         }
 
         return readingValueService.saveAll(readingValueEntityList);

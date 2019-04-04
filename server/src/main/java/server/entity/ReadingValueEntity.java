@@ -1,13 +1,14 @@
 package server.entity;
 
 import reading.Reading;
+import reading.ReadingUnits;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
-@Entity(name="reading")
-@Table(indexes = {@Index(name = "reading_type_idx", columnList = "reading_key_id"),@Index(name = "reading_station_idx", columnList = "station_id")})
+@Entity
+@Table(name="reading", indexes = {@Index(name = "reading_type_idx", columnList = "reading_key_id"),@Index(name = "reading_station_idx", columnList = "station_id")})
 public class ReadingValueEntity {
 
     @Id
@@ -16,6 +17,10 @@ public class ReadingValueEntity {
 
     @Column(nullable = false)
     private Double value;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ReadingUnits units;
 
     @Column(nullable = false)
     private ZonedDateTime time;
@@ -31,10 +36,11 @@ public class ReadingValueEntity {
         //for hibernate
     }
 
-    public ReadingValueEntity(ReadingKeyEntity readingKey, StationEntity station, Double value, ZonedDateTime time) {
+    public ReadingValueEntity(ReadingKeyEntity readingKey, StationEntity station, Double value, ReadingUnits units, ZonedDateTime time) {
         this.readingKey = readingKey;
         this.station = station;
         this.value = value;
+        this.units = units;
         this.time = time;
     }
 
@@ -43,6 +49,7 @@ public class ReadingValueEntity {
         this.station = station;
         this.value = reading.getValue();
         this.time = reading.getTime();
+        this.units = reading.getUnits();
     }
 
 
@@ -66,19 +73,28 @@ public class ReadingValueEntity {
         return station;
     }
 
+    public String getUnits() {
+        return units.getAbbreviation();
+    }
+
+    public ReadingKeyEntity getReadingKey() {
+        return readingKey;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ReadingValueEntity that = (ReadingValueEntity) o;
         return getValue().equals(that.getValue()) &&
+                getUnits() == that.getUnits() &&
                 getTime().equals(that.getTime()) &&
-                getReadingKeyEntity().equals(that.getReadingKeyEntity()) &&
+                getReadingKey().equals(that.getReadingKey()) &&
                 getStation().equals(that.getStation());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getValue(), getTime(), getReadingKeyEntity(), getStation());
+        return Objects.hash(getValue(), getUnits(), getTime(), getReadingKey(), getStation());
     }
 }
