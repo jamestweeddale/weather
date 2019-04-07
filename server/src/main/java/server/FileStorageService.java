@@ -7,14 +7,14 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.nio.file.*;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -61,6 +61,19 @@ public class FileStorageService {
     public long writeFile(InputStream inputStream, Path targetLocation) throws IOException {
         return Files.copy(inputStream, targetLocation, StandardCopyOption.REPLACE_EXISTING);
     }
+
+    public File getLatestForStation(UUID stationUuid) throws FileNotFoundException{
+        String todaysDate = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        Path folder = baseFileStorageLocation.resolve(stationUuid + File.separator + todaysDate);
+        Optional<File> mostRecentFile =
+                Arrays.stream(folder.toFile().listFiles())
+                        .filter(f -> f.isFile())
+                        .max((f1, f2) -> Long.compare(f1.lastModified(),
+                                f2.lastModified()));
+
+        return mostRecentFile.orElseThrow(() -> new FileNotFoundException());
+    }
+
 
     private String createFileName(ZonedDateTime captureTime, UUID stationUUID, String extension) {
         DateTimeFormatter formatter =

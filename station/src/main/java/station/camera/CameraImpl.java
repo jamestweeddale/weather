@@ -16,7 +16,7 @@ import java.io.IOException;
 public class CameraImpl implements Camera{
     private static final Logger logger = LoggerFactory.getLogger(CameraImpl.class);
 
-    private static final String COMMAND = "raspistill -o ";
+    private static final String COMMAND = "raspistill -w 1024 -h 768 -o ";
     private static final String FILE_NAME = "newcap.jpg";
     private final String fileDir;
 
