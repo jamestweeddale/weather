@@ -16,6 +16,7 @@ public class ReadingTypeRegistry {
         readingTypeSet = new HashSet<>();
         this.readingTypeSet.add(new SpeedType());
         this.readingTypeSet.add(new TemperatureType());
+        this.readingTypeSet.add(new HumidityType());
     }
 
     public ReadingType getTypeForUnits(ReadingUnits readingUnits){
