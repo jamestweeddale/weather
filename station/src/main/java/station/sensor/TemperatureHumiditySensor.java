@@ -5,6 +5,7 @@ import com.pi4j.io.i2c.I2CDevice;
 import com.pi4j.io.i2c.I2CFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import reading.Reading;
 import reading.ReadingUnits;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@ConditionalOnProperty(value = "station.temperature.enabled", havingValue = "true")
 public class TemperatureHumiditySensor implements Sensor {
     private static final Logger logger = LoggerFactory.getLogger(TemperatureHumiditySensor.class);
 
