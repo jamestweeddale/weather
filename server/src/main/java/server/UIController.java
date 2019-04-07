@@ -51,7 +51,7 @@ public class UIController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value="/station/{stationUuid}/latest-image", produces = MediaType.IMAGE_JPEG_VALUE)
-    public @ResponseBody byte[] getLatestImageForStation(@PathVariable(name="stationUuid") UUID stationUuid) throws FileNotFoundException, IOException {
+    public @ResponseBody byte[] getLatestImageForStation(@PathVariable(name="stationUuid") UUID stationUuid) throws IOException {
         return Files.readAllBytes(fileStorageService.getLatestForStation(stationUuid).toPath());
     }
 }
