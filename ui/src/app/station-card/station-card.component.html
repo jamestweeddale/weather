@@ -1,7 +1,9 @@
-<div class="card">
+<div class="card" style="width:19em;min-height:400px;">
   <div class="card-body">
     <h5 class="card-title">{{station.name}}</h5>
       <station-card-latest-readings [stationId]="station.id" (lastUpdatedEmitter)="touchUpdateTime($event)"></station-card-latest-readings>
       <small class="text-muted">last updated {{readingsLastUpdated | date: 'shortTime'}}</small>
   </div>
+  <img [src]="latestImgPath" class="card-img-bottom"/>
+
 </div>

@@ -16,7 +16,7 @@ import { KeyValueComponent } from './key-value/key-value.component';
     StationListComponent,
     StationCardComponent,
     StationCardLatestReadingsComponent,
-    KeyValueComponent
+    KeyValueComponent,
   ],
   imports: [
     BrowserModule,

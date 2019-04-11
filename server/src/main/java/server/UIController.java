@@ -1,33 +1,32 @@
 package server;
 
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 import server.entity.ReadingKeyEntity;
 import server.entity.ReadingValueEntity;
 import server.entity.StationEntity;
 import server.service.ReadingValueService;
 import server.service.StationService;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @CrossOrigin
 public class UIController {
+    private static final Logger logger = LoggerFactory.getLogger(UIController.class);
 
     private StationService stationService;
 
     private ReadingValueService readingValueService;
 
-    private FileStorageService fileStorageService;
 
-    public UIController(StationService stationService, ReadingValueService readingValueService,
-    FileStorageService fileStorageService) {
+    public UIController(StationService stationService, ReadingValueService readingValueService) {
         this.stationService = stationService;
         this.readingValueService = readingValueService;
-        this.fileStorageService = fileStorageService;
     }
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/station-list")
@@ -45,11 +44,5 @@ public class UIController {
     @GetMapping("/station/{stationId}/reading-keys")
     public List<ReadingKeyEntity> getReadingKeysForStation(@PathVariable(name="stationId") Long stationId){
         return readingValueService.getDistinctReadingKeysForStation(stationId);
-    }
-
-    @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping(value="/station/{stationUuid}/latest-image", produces = MediaType.IMAGE_JPEG_VALUE)
-    public @ResponseBody byte[] getLatestImageForStation(@PathVariable(name="stationUuid") UUID stationUuid) throws IOException {
-        return Files.readAllBytes(fileStorageService.getLatestForStation(stationUuid).toPath());
     }
 }
