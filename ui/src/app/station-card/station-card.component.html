@@ -1,6 +1,6 @@
 <div class="card" style="width:19em;min-height:400px;">
   <div class="card-body">
-    <h5 class="card-title">{{station.name}}</h5>
+    <h5 class="card-title">{{station.name}} <i class="fas fa-check fa-xs" style="color:green;display:inline;"></i></h5>
       <station-card-latest-readings [stationId]="station.id" (lastUpdatedEmitter)="touchUpdateTime($event)"></station-card-latest-readings>
       <small class="text-muted">last updated {{readingsLastUpdated | date: 'shortTime'}}</small>
   </div>

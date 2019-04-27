@@ -6,6 +6,10 @@ import server.entity.ReadingKeyEntity;
 import server.entity.ReadingValueEntity;
 import server.repository.ReadingValueRepository;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 
 
@@ -31,6 +35,6 @@ public class ReadingValueServiceImpl implements ReadingValueService {
 
     @Override
     public ReadingValueEntity getLatestFor(Long stationId, Long readingKeyId) {
-        return readingValueRepository.findFirstByStationIdAndReadingKeyIdOrderByIdDesc(stationId, readingKeyId);
+        return readingValueRepository.findFirstByStationIdAndReadingKeyIdAndTimeAfterOrderByIdDesc(stationId, readingKeyId, ZonedDateTime.now().minusMinutes(10));
     }
 }
