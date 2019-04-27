@@ -7,16 +7,18 @@ public class MCP3008OutputConverter implements AnalogToDigitalValueConverter {
     private double sensorVoltageMin;   //min output voltage from sensor spec
     private double sensorVoltageMax;   //max output voltage from sensor spec
     private double maxValue;           //maximum value reported by the sensor (ex: 100mph)
+    private double adjustmentValue;
 
-    public MCP3008OutputConverter(double sensorVoltageMin, double sensorVoltageMax, double maxValue) {
+    public MCP3008OutputConverter(double sensorVoltageMin, double sensorVoltageMax, double maxValue, double adjustmentValue) {
         this.sensorVoltageMin = sensorVoltageMin;
         this.sensorVoltageMax = sensorVoltageMax;
         this.maxValue = maxValue;
+        this.adjustmentValue = adjustmentValue;
     }
 
     @Override
     public double convert(double mcpOutputValue) {
-
+        mcpOutputValue -= adjustmentValue;
         double sensorVoltage = mcpOutputValue * VOLTAGE_CONVERSION_CONSTANT; //Convert sensor value to actual voltage
 
         double windSpeed;
