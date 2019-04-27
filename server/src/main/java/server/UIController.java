@@ -41,6 +41,12 @@ public class UIController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/station/{stationId}/last-reading")
+    public ReadingValueEntity getLastReadingForStation(@PathVariable(name="stationId") Long stationId){
+        return readingValueService.getLastForStation(stationId);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/station/{stationId}/reading-keys")
     public List<ReadingKeyEntity> getReadingKeysForStation(@PathVariable(name="stationId") Long stationId){
         return readingValueService.getDistinctReadingKeysForStation(stationId);

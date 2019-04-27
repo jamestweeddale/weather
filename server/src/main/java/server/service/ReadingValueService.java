@@ -12,4 +12,7 @@ public interface ReadingValueService {
     ReadingValueEntity getLatestFor(Long stationId, Long readingKeyId);
 
     List<ReadingKeyEntity> getDistinctReadingKeysForStation(Long stationId);
+
+    ReadingValueEntity getLastForStation(Long stationId);
+
 }

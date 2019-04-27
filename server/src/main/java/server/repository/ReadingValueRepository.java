@@ -8,7 +8,6 @@ import server.entity.ReadingKeyEntity;
 import server.entity.ReadingValueEntity;
 
 import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -18,5 +17,8 @@ public interface ReadingValueRepository extends JpaRepository<ReadingValueEntity
     List<ReadingKeyEntity> findReadingKeysForStation(@Param("stationId") Long stationId);
 
     ReadingValueEntity findFirstByStationIdAndReadingKeyIdAndTimeAfterOrderByIdDesc(@Param("stationId") Long stationId, @Param("readingKeyId") Long readingKeyId, @Param("time") ZonedDateTime readingTime);
+
+    ReadingValueEntity findFirstByStationIdOrderByIdDesc(@Param("stationId") Long stationId);
+
 }
 

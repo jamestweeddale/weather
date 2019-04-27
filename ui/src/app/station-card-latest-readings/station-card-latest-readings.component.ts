@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { ReadingService } from '../reading-service/reading.service';
 import { forEach } from '@angular/router/src/utils/collection';
 
@@ -11,7 +11,6 @@ export class StationCardLatestReadingsComponent implements OnInit {
 
   @Input() stationId: number;
   readingKeys: Array<ReadingKey>;
-  @Output() lastUpdatedEmitter:EventEmitter<Date> = new EventEmitter<Date>();
 
   constructor(private readingService: ReadingService) { }
 
@@ -21,7 +20,4 @@ export class StationCardLatestReadingsComponent implements OnInit {
     });
   }
 
-  fireLastUpdated(lastUpdated:Date){
-    this.lastUpdatedEmitter.emit(new Date());
-  }
 }

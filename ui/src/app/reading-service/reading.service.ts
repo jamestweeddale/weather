@@ -18,4 +18,8 @@ export class ReadingService {
   getLatestValueFor(stationId: number, readingKeyId: number): Observable<Reading> {
     return this.http.get<Reading>(environment.hostUrlBase + '/station/' + stationId + '/latest-reading/' + readingKeyId);
   }
+
+  getLastReading(stationId: number): Observable<Reading> {
+    return this.http.get<Reading>(environment.hostUrlBase + '/station/' + stationId + '/last-reading');
+  }
 }
