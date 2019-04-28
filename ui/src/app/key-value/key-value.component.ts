@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output} from '@angular/core';
 import { ReadingService } from '../reading-service/reading.service';
 import { updateBinding } from '@angular/core/src/render3/instructions';
 import { timer } from 'rxjs';
+import { UnitConverionService } from '../unit-conversion-service/unit-converion.service';
 
 @Component({
   selector: 'reading-key-value',
@@ -14,7 +15,7 @@ export class KeyValueComponent implements OnInit {
   @Input() stationId: number;
   value: Reading;
 
-  constructor(private readingService: ReadingService) { }
+  constructor(private readingService: ReadingService, private unitConversionService: UnitConverionService) { }
 
   ngOnInit() {
     timer(0, 10000)
@@ -22,8 +23,11 @@ export class KeyValueComponent implements OnInit {
   }
 
   update(){
-    this.readingService.getLatestValueFor(this.stationId, this.readingKey.id).subscribe(val => {
-      this.value = val;
+    this.readingService.getLatestValueFor(this.stationId, this.readingKey.id).subscribe(reading => {
+      if(reading != null){
+        reading = this.unitConversionService.convert(reading);
+      }
+      this.value = reading;
     });
   }
 
