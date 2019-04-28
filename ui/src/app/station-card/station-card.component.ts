@@ -18,7 +18,7 @@ export class StationCardComponent implements OnInit {
   constructor(private readingService: ReadingService) { }
 
   ngOnInit() {
-    timer(0, 10000).subscribe(() => this.updatePic());
+    timer(0, 600000).subscribe(() => this.updatePic());
     timer(0, 300000).subscribe(() => this.updateMinsAgo());
   }
 
