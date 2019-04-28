@@ -39,7 +39,7 @@ public class AdafruitAnemometer implements Sensor {
     @Autowired
     public AdafruitAnemometer(GpioService gpioService,
                               @Value("${station.sensor.anemometer.analogChannel:0}") Integer pinIndex,
-                              @Value("station.mcp3008.adjustmentValue") Double adjustmentValue) {
+                              @Value("${station.mcp3008.adjustmentValue:0}") Double adjustmentValue) {
         this.gpioService = gpioService;
         this.analogPin = MCP3008Pin.ALL[pinIndex];
         this.analogToDigitalValueConverter = new MCP3008OutputConverter(SENSOR_VOLTAGE_MIN, SENSOR_VOLTAGE_MAX, MAX_WIND_SPEED_MPS, adjustmentValue);
