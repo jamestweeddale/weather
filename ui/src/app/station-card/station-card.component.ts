@@ -1,8 +1,6 @@
-import { Component, OnInit, Input, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { Component, OnInit, Input } from '@angular/core';
 import { timer } from 'rxjs';
 import { ReadingService } from '../reading-service/reading.service';
-import { StationCardLatestReadingsComponent } from '../station-card-latest-readings/station-card-latest-readings.component';
 
 @Component({
   selector: 'station-card',
@@ -24,7 +22,7 @@ export class StationCardComponent implements OnInit {
 
   updatePic() {
     var randomNum: number = Math.floor(Math.random() * 1000000) + 1;
-    this.latestImgPath = environment.hostUrlBase + "/station-images/" + this.station.uuid + "/latest.jpg?rand=" + randomNum;
+    this.latestImgPath = "/station-images/" + this.station.uuid + "/latest.jpg?rand=" + randomNum;
   }
 
   updateMinsAgo() {
