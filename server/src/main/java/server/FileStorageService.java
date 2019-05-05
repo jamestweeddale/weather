@@ -25,9 +25,13 @@ public class FileStorageService {
 
     private final Path baseFileStorageLocation;
 
+    private Boolean archiveEnabled;
+
     @Autowired
-    public FileStorageService(@Value("${server.picture.uploads.fileStoragePath:/opt/weather/station-images}") String fileStoragePath) throws IOException{
+    public FileStorageService(@Value("${server.picture.uploads.fileStoragePath:/opt/weather/station-images}") String fileStoragePath,
+                              @Value("${server.picture.archiveEnabled:false}") Boolean archiveEnabled) throws IOException{
         this.baseFileStorageLocation = Paths.get(fileStoragePath).toAbsolutePath().normalize();
+        this.archiveEnabled = archiveEnabled;
 
         try {
             Files.createDirectories(this.baseFileStorageLocation);
@@ -54,9 +58,11 @@ public class FileStorageService {
                 //update most-recent image for station
                 writeFile(file.getInputStream(), this.baseFileStorageLocation.resolve(stationUUID.toString() + File.separator + "latest.jpg"));
 
-                //copy file to the archive location (station/date/uid)
-                Path targetLocation = this.baseFileStorageLocation.resolve(stationUUID + File.separator + dateDir + File.separator + createFileName(captureTime, stationUUID, extension));
-                writeFile(file.getInputStream(), targetLocation);
+                if(archiveEnabled) {
+                    //copy file to the archive location (station/date/uid)
+                    Path targetLocation = this.baseFileStorageLocation.resolve(stationUUID + File.separator + dateDir + File.separator + createFileName(captureTime, stationUUID, extension));
+                    writeFile(file.getInputStream(), targetLocation);
+                }
             }
 
         } catch (IOException ex) {
