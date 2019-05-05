@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output} from '@angular/core';
 import { ReadingService } from '../reading-service/reading.service';
-import { updateBinding } from '@angular/core/src/render3/instructions';
 import { timer } from 'rxjs';
 import { UnitConverionService } from '../unit-conversion-service/unit-converion.service';
 
