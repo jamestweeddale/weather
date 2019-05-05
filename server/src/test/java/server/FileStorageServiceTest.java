@@ -30,7 +30,7 @@ public class FileStorageServiceTest {
 
     @Test
     public void test_filename_creation() throws IOException {
-        FileStorageService fileStorageService = new FileStorageService("/testpath");
+        FileStorageService fileStorageService = new FileStorageService("/testpath", true);
 
         FileStorageService spyFileStorageService =  Mockito.spy(fileStorageService);
 
