@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ReadingService } from '../reading-service/reading.service';
-import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'station-card-latest-readings',
