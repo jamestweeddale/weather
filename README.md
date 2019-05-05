@@ -50,5 +50,6 @@ Technology Stack:
 <li>Improved camera timing/scheduling configuration 
 </p>
 
-<img src="https://i1291.photobucket.com/albums/b545/RappahannockRag/IMG_8816_zpsphgaqszq.jpg">
+<img src="https://i1291.photobucket.com/albums/b545/RappahannockRag/Capture_zps8zzmkwqu.png">
+<img src="https://i1291.photobucket.com/albums/b545/RappahannockRag/IMG_8816_zpsphgaqszq.jpg" height="415px">
 
