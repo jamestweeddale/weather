@@ -41,6 +41,12 @@ Technology Stack:
 </p>
 
 <br>
+<p>
+<img src="https://i1291.photobucket.com/albums/b545/RappahannockRag/Capture_zps8zzmkwqu.png">
+<img src="https://i1291.photobucket.com/albums/b545/RappahannockRag/IMG_8816_zpsphgaqszq.jpg" height="415px">
+</p>
+
+<br>
 
 <b>Coming Soon</b>
 <p>
@@ -49,7 +55,3 @@ Technology Stack:
 <li>Barometer support
 <li>Improved camera timing/scheduling configuration 
 </p>
-
-<img src="https://i1291.photobucket.com/albums/b545/RappahannockRag/Capture_zps8zzmkwqu.png">
-<img src="https://i1291.photobucket.com/albums/b545/RappahannockRag/IMG_8816_zpsphgaqszq.jpg" height="415px">
-
