@@ -42,8 +42,8 @@ Technology Stack:
 
 <br>
 <p>
-<img src="https://i.imgur.com/nTBlvRE.jpg">
-<img src="https://i.imgur.com/y3lfoSc.png" height="415px">
+<img src="https://i.imgur.com/nTBlvRE.jpg" height="415px">
+<img src="https://i.imgur.com/6FL0AFf.png" height="415px">
 </p>
 
 <br>
