@@ -42,8 +42,8 @@ Technology Stack:
 
 <br>
 <p>
-<img src="https://i1291.photobucket.com/albums/b545/RappahannockRag/Capture_zps8zzmkwqu.png">
-<img src="https://i1291.photobucket.com/albums/b545/RappahannockRag/IMG_8816_zpsphgaqszq.jpg" height="415px">
+<img src="https://i.imgur.com/nTBlvRE.jpg">
+<img src="https://i.imgur.com/y3lfoSc.png" height="415px">
 </p>
 
 <br>
