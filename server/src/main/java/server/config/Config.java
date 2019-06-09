@@ -26,4 +26,5 @@ public class Config implements WebMvcConfigurer {
                 .addResourceLocations("file:/opt/weather/station-images/");
     }
 
+
 }

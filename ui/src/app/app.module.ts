@@ -7,14 +7,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StationListComponent } from './station-list/station-list.component';
 import { StationCardComponent } from './station-card/station-card.component';
-import { ChartingComponent } from './charting/charting.component';
+import { ChartComponent } from './charting/chart/chart.component';
 import { StationCardLatestReadingsComponent } from './station-card-latest-readings/station-card-latest-readings.component';
 import { KeyValueComponent } from './key-value/key-value.component';
 import { ChartModule } from 'angular-highcharts';
 import { RouterModule, Routes } from '@angular/router';
+import { ControlFormComponent } from './charting/control-form/control-form.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 const appRoutes: Routes = [
-  { path: 'charting', component: ChartingComponent },
+  { path: 'charting', component: ChartComponent },
   { path: 'current',  component: StationListComponent},
   { path: '', component: StationListComponent }
 ];
@@ -26,7 +28,8 @@ const appRoutes: Routes = [
     StationCardComponent,
     StationCardLatestReadingsComponent,
     KeyValueComponent,
-    ChartingComponent
+    ChartComponent,
+    ControlFormComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -37,7 +40,8 @@ const appRoutes: Routes = [
     AppRoutingModule,
     HttpClientModule,
     MDBBootstrapModule.forRoot(),
-    ChartModule
+    ChartModule,
+    NgbModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [],

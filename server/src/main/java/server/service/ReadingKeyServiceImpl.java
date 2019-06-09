@@ -8,6 +8,7 @@ import server.repository.ReadingKeyRepository;
 import server.type.ReadingType;
 import server.type.ReadingTypeRegistry;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,5 +35,10 @@ public class ReadingKeyServiceImpl implements ReadingKeyService {
             ReadingType readingType = readingTypeRegistry.getTypeForUnits(reading.getUnits());
             return readingKeyRepository.save(new ReadingKeyEntity(reading.getName(), readingType.getTypeName()));
         }
+    }
+
+    @Override
+    public List<ReadingKeyEntity> getAll() {
+        return readingKeyRepository.findAll();
     }
 }

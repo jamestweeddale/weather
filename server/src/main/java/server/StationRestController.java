@@ -8,15 +8,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import reading.Reading;
 import reading.StationReadings;
+import server.entity.ReadingKeyEntity;
+import server.service.ReadingKeyService;
 import server.service.ReadingStorageService;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -27,10 +28,13 @@ public class StationRestController {
 
     private ReadingStorageService readingStorageService;
 
+    private ReadingKeyService readingKeyService;
+
     @Autowired
-    public StationRestController(FileStorageService fileStorageService, ReadingStorageService readingStorageService) {
+    public StationRestController(FileStorageService fileStorageService, ReadingStorageService readingStorageService, ReadingKeyService readingKeyService) {
         this.fileStorageService = fileStorageService;
         this.readingStorageService = readingStorageService;
+        this.readingKeyService = readingKeyService;
     }
 
     @PostMapping(value = "/post/station-readings", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -64,6 +68,11 @@ public class StationRestController {
         }
 
         return ResponseEntity.status(httpStatus).build();
+    }
+
+    @GetMapping("/reading-keys")
+    public List<ReadingKeyEntity> getallReadingKeys(){
+            return readingKeyService.getAll();
     }
 
 }

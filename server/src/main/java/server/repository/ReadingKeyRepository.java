@@ -4,10 +4,13 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import server.entity.ReadingKeyEntity;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface ReadingKeyRepository extends CrudRepository<ReadingKeyEntity, Long> {
 
     Optional<ReadingKeyEntity> findOneByName(String name);
+
+    List<ReadingKeyEntity> findAll();
 }

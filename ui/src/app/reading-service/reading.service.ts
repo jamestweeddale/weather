@@ -14,6 +14,10 @@ export class ReadingService {
     return this.http.get('/station/' + stationId + '/reading-keys');
   }
 
+  getAllReadingKeys(): Observable<any> {
+    return this.http.get('/reading-keys');
+  }
+
   getLatestValueFor(stationId: number, readingKeyId: number): Observable<Reading> {
     return this.http.get<Reading>('/station/' + stationId + '/latest-reading/' + readingKeyId);
   }

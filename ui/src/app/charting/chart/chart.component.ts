@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Chart } from 'angular-highcharts';
 
 @Component({
-  selector: 'app-charting',
-  templateUrl: './charting.component.html',
-  styleUrls: ['./charting.component.css']
+  selector: 'weather-chart',
+  templateUrl: './chart.component.html',
+  styleUrls: ['./chart.component.css']
 })
-export class ChartingComponent implements OnInit {
+export class ChartComponent implements OnInit {
 
   constructor() { }
 
@@ -26,14 +26,10 @@ export class ChartingComponent implements OnInit {
     series: [
       {
         name: 'Temp',
-        data: [1, 2, 3]
+        data: [1, 2, 3],
+        type: 'line'
       }
     ]
   });
  
-  // add point to chart serie
-  add() {
-    this.chart.addPoint(Math.floor(Math.random() * 10));
-  }
-
 }
